@@ -4,9 +4,9 @@ function drawBlock(ctx: CanvasRenderingContext2D,
     color: string = "blue"): void {
 
     ctx.fillStyle = color;
-    let xStartPx: number = (rowId * blockWidth); // upper left corner
-    let yStartPx: number = (colId * blockHeight); // upper left corner
-    ctx.fillRect(xStartPx, yStartPx, blockWidth - 1, blockHeight - 1);
+    let xStartPx: number = (rowId * blockWidth) + 1; // upper left corner
+    let yStartPx: number = (colId * blockHeight) + 1; // upper left corner
+    ctx.fillRect(xStartPx, yStartPx, blockWidth - 2, blockHeight - 2);
 }
 
 export default drawBlock;
