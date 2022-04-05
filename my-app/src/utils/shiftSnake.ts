@@ -1,14 +1,5 @@
-interface Block {
-    x: number,
-    y: number,
-}
-
-enum Direction {
-    Up,
-    Right,
-    Down,
-    Left,
-}
+import Block from '../interfaces/Block';
+import Direction from '../types/Direction';
 
 function shiftBlock(block: Block, direction: Direction): Block {
     if (direction === Direction.Up) {

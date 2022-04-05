@@ -1,13 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import setCanvasDefaults from './draw/setCanvasDefaults';
 import drawBlock from './draw/drawBlock';
+import Block from '../interfaces/Block';
 
 import './Canvas.css';
-
-interface Block {
-    x: number,
-    y: number,
-}
 
 interface Props {
     snake: Block[],

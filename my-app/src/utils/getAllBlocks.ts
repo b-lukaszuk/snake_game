@@ -1,7 +1,4 @@
-interface Block {
-    x: number,
-    y: number,
-}
+import Block from '../interfaces/Block';
 
 function getAllBlocks(nrows: number, ncols: number): Block[] {
     let result: Block[] = [];

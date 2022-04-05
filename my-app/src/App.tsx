@@ -1,11 +1,7 @@
 import React, { useState } from 'react';
 import Canvas from './canvas/Canvas';
+import Block from './interfaces/Block';
 import './App.css';
-
-interface Block {
-    x: number,
-    y: number,
-}
 
 function App() {
 
