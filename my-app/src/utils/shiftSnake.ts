@@ -1,6 +1,7 @@
 import Block from '../interfaces/Block';
 import Direction from '../types/Direction';
 
+// x and y are like row, col in Python's pd.DataFrame
 function shiftBlock(block: Block, direction: Direction): Block {
     if (direction === Direction.Up) {
         return { x: block.x - 1, y: block.y };
