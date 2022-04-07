@@ -18,22 +18,26 @@ function App() {
         Direction.Right
     );
 
-    const keyDown = (event: KeyboardEvent): void => {
-        if (event.key === "ArrowLeft") {
-            setMoveDirection(Direction.Left);
-        }
-        if (event.key === "ArrowUp") {
-            setMoveDirection(Direction.Up);
-        }
-        if (event.key === "ArrowRight") {
-            setMoveDirection(Direction.Right);
-        }
-        if (event.key === "ArrowDown") {
-            setMoveDirection(Direction.Down);
-        }
-    };
-
-    document.addEventListener("keydown", keyDown);
+    useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === "ArrowLeft") {
+                setMoveDirection(Direction.Left);
+            }
+            if (event.key === "ArrowUp") {
+                setMoveDirection(Direction.Up);
+            }
+            if (event.key === "ArrowRight") {
+                setMoveDirection(Direction.Right);
+            }
+            if (event.key === "ArrowDown") {
+                setMoveDirection(Direction.Down);
+            }
+        };
+        document.addEventListener("keydown", handleKeyDown);
+        return () => {
+            document.removeEventListener("keydown", handleKeyDown);
+        };
+    }, []);
 
     useEffect(() => {
         let timerId = setInterval(() => {
