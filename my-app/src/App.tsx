@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Canvas from "./canvas/Canvas";
 import Block from "./interfaces/Block";
 import "./App.css";
-import shiftSnake from "./utils/shiftSnake";
+import { shiftBlock, shiftSnake } from "./utils/shiftSnake";
 import Direction from "./types/Direction";
 
 function App() {

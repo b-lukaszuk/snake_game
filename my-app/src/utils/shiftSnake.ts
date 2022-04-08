@@ -23,4 +23,4 @@ function shiftSnake(snake: Block[], direction: Direction): Block[] {
     return newSnake;
 }
 
-export default shiftSnake;
+export {shiftBlock, shiftSnake};
