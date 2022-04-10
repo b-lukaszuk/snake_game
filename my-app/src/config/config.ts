@@ -1,12 +1,12 @@
 let config = {
-    "nOfRows": 10,
-    "nOfCols": 10,
+    "nOfRows": 5,
+    "nOfCols": 5,
     "snake": [
-        { "x": 0, "y": 4 },
-        { "x": 0, "y": 3 },
         { "x": 0, "y": 2 },
+        { "x": 0, "y": 1 },
+        { "x": 0, "y": 0 },
     ],
-    "food": { "x": 4, "y": 4 }
+    "food": { "x": 3, "y": 3 }
 }
 
 export default config;
