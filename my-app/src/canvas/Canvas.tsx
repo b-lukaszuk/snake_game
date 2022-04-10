@@ -28,7 +28,7 @@ const Canvas: React.FC<Props> = (props) => {
         if (ctx === null) { return undefined; }
         snake.forEach(b => drawBlock(ctx, b.x, b.y, blockWidth, blockHeight));
         drawBlock(ctx, food.x, food.y, blockWidth, blockHeight, "red");
-    }, [snake, food]);
+    }, [snake, food, nOfRows, nOfCols]);
 
     return (
         <div>
