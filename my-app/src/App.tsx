@@ -3,6 +3,8 @@ import Canvas from "./canvas/Canvas";
 import Block from "./interfaces/Block";
 import "./App.css";
 import { shiftBlock, shiftSnake } from "./utils/shiftSnake";
+import eatFood from "./utils/eatFood";
+import getFreeRandBlock from "./utils/getRandBlock";
 import Direction from "./types/Direction";
 import config from "./config/config";
 
@@ -40,7 +42,21 @@ function App() {
     useEffect(() => {
         let timerId = setInterval(() => {
             setSnake(shiftSnake(snake, moveDirection));
-        }, 500);
+            let newSnakeHead: Block = shiftBlock(snake[0], moveDirection);
+            if (newSnakeHead.x === food.x && newSnakeHead.y === food.y) {
+                setSnake((prevSnake: Block[]) => {
+                    return eatFood(prevSnake, food);
+                })
+                console.log("newSnake:", snake);
+                setFood((prevFood: Block) => {
+                    return {
+                        prevFood,
+                        ...getFreeRandBlock(0, config.nOfRows + 1, snake)
+                    };
+                })
+                console.log("newFood", food);
+            }
+        }, 1000);
         return () => {
             clearInterval(timerId);
         };
