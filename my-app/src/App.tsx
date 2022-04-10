@@ -41,7 +41,9 @@ function App() {
 
     useEffect(() => {
         let timerId = setInterval(() => {
-            setSnake(shiftSnake(snake, moveDirection));
+            setSnake((prevSnake: Block[]) => {
+                return shiftSnake(prevSnake, moveDirection);
+            })
             let newSnakeHead: Block = shiftBlock(snake[0], moveDirection);
             if (newSnakeHead.x === food.x && newSnakeHead.y === food.y) {
                 setSnake((prevSnake: Block[]) => {
