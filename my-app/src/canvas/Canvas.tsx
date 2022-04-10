@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import setCanvasDefaults from './draw/setCanvasDefaults';
 import drawBlock from './draw/drawBlock';
 import Block from '../interfaces/Block';
+import config from "../config/config";
 
 import './Canvas.css';
 
@@ -14,8 +15,8 @@ const Canvas: React.FC<Props> = (props) => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
     let snake: Block[] = props.snake;
     let food: Block = props.food;
-    const nOfRows: number = 20;
-    const nOfCols: number = 20;
+    const nOfRows: number = config.nOfRows;
+    const nOfCols: number = config.nOfCols;
 
     useEffect(() => {
         const canvas: HTMLCanvasElement | null = canvasRef.current;

@@ -4,22 +4,20 @@ import Block from "./interfaces/Block";
 import "./App.css";
 import { shiftBlock, shiftSnake } from "./utils/shiftSnake";
 import Direction from "./types/Direction";
+import config from "./config/config";
 
 function App() {
     // x - no of row, y - no of col of canvas (see Canvas element)
     // x, y works similar to nrow, ncol in Python's pd.DataFrame
-    const [snake, setSnake]: [Block[], Function] = useState([
-        { x: 0, y: 4 },
-        { x: 0, y: 3 },
-        { x: 0, y: 2 },
-    ]);
-    const [food, setFood]: [Block, Function] = useState({ x: 4, y: 4 });
+    const [snake, setSnake]: [Block[], Function] = useState(config.snake);
+    const [food, setFood]: [Block, Function] = useState(config.food);
     const [moveDirection, setMoveDirection]: [Direction, Function] = useState(
         Direction.Right
     );
 
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
+            console.log("keypress detected:", event.key);
             if (event.key === "ArrowLeft") {
                 setMoveDirection(Direction.Left);
             }
@@ -42,11 +40,11 @@ function App() {
     useEffect(() => {
         let timerId = setInterval(() => {
             setSnake(shiftSnake(snake, moveDirection));
-        }, 1000);
+        }, 500);
         return () => {
             clearInterval(timerId);
         };
-    });
+    }, [food, moveDirection, snake]);
 
     return (
         <div className="App">
