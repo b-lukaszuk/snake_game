@@ -1,4 +1,4 @@
-let config = {
+const config = {
     "nOfRows": 5,
     "nOfCols": 5,
     "snake": [
