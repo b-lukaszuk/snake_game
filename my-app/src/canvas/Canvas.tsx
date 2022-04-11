@@ -19,6 +19,8 @@ const Canvas: React.FC<Props> = (props) => {
     const nOfCols: number = config.nOfCols;
 
     useEffect(() => {
+        console.log("canvas snake:", snake);
+        console.log("canvas food", food);
         const canvas: HTMLCanvasElement | null = canvasRef.current;
         if (canvas === null) { return undefined; }
         const blockWidth: number = canvas.width / nOfCols;

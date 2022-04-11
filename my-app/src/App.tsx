@@ -16,6 +16,7 @@ function App() {
     const [moveDirection, setMoveDirection]: [Direction, Function] = useState(
         Direction.Right
     );
+    const [gameOver, setGameOver]: [boolean, Function] = useState(false);
 
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
@@ -59,13 +60,17 @@ function App() {
                 console.log("newFood", food);
             }
         }, 1000);
+        if (gameOver) {
+            clearInterval(timerId);
+        }
         return () => {
             clearInterval(timerId);
         };
-    }, [food, moveDirection, snake]);
+    }, [food, moveDirection, snake, gameOver]);
 
     return (
         <div className="App">
+            <button onClick={() => setGameOver(true)}>End game</button>
             <Canvas snake={snake} food={food} />
         </div>
     );
