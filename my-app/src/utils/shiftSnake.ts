@@ -15,12 +15,9 @@ function shiftBlock(block: Block, direction: Direction): Block {
 }
 
 function shiftSnake(snake: Block[], direction: Direction): Block[] {
-    let newSnake: Block[] = [];
-    newSnake.push(shiftBlock(snake[0], direction));
-    for (let i = 0; i < snake.length - 1; i++) {
-        newSnake.push(snake[i]);
-    }
+    let newSnake: Block[] = snake.slice(0, -1);
+    newSnake.unshift(shiftBlock(snake[0], direction))
     return newSnake;
 }
 
-export {shiftBlock, shiftSnake};
+export { shiftBlock, shiftSnake };
