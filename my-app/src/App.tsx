@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, ReactElement } from "react";
 import Canvas from "./canvas/Canvas";
 import Block from "./interfaces/Block";
 import "./App.css";
@@ -8,7 +8,7 @@ import getFreeRandBlock from "./utils/getRandBlock";
 import Direction from "./types/Direction";
 import config from "./config/config";
 
-function App() {
+const App: React.FC = (): ReactElement<HTMLElement> => {
     // x - no of row, y - no of col of canvas (see Canvas element)
     // x, y works similar to nrow, ncol in Python's pd.DataFrame
     const [snake, setSnake]: [Block[], Function] = useState(config.snake);
@@ -44,19 +44,19 @@ function App() {
         let timerId = setInterval(() => {
             setSnake((prevSnake: Block[]) => {
                 return shiftSnake(prevSnake, moveDirection);
-            })
+            });
             let newSnakeHead: Block = shiftBlock(snake[0], moveDirection);
             if (newSnakeHead.x === food.x && newSnakeHead.y === food.y) {
                 setSnake((prevSnake: Block[]) => {
                     return eatFood(prevSnake, food);
-                })
+                });
                 console.log("newSnake:", snake);
                 setFood((prevFood: Block) => {
                     return {
                         prevFood,
-                        ...getFreeRandBlock(0, config.nOfRows + 1, snake)
+                        ...getFreeRandBlock(0, config.nOfRows + 1, snake),
                     };
-                })
+                });
                 console.log("newFood", food);
             }
         }, 1000);
@@ -74,6 +74,6 @@ function App() {
             <Canvas snake={snake} food={food} />
         </div>
     );
-}
+};
 
 export default App;
