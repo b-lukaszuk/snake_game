@@ -13,10 +13,12 @@ interface Props {
 
 const Canvas: React.FC<Props> = (props) => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
-    let snake: Block[] = props.snake;
-    let food: Block = props.food;
+    const snake: Block[] = props.snake;
+    const food: Block = props.food;
     const nOfRows: number = config.nOfRows;
     const nOfCols: number = config.nOfCols;
+    const snakeColor: string = config.snakeColor;
+    const foodColor: string = config.foodColor;
 
     useEffect(() => {
         console.log("canvas snake:", snake);
@@ -28,9 +30,9 @@ const Canvas: React.FC<Props> = (props) => {
         setCanvasDefaults(canvas);
         const ctx: CanvasRenderingContext2D | null = canvas.getContext("2d");
         if (ctx === null) { return undefined; }
-        snake.forEach(b => drawBlock(ctx, b.x, b.y, blockWidth, blockHeight));
-        drawBlock(ctx, food.x, food.y, blockWidth, blockHeight, "red");
-    }, [snake, food, nOfRows, nOfCols]);
+        snake.forEach(b => drawBlock(ctx, b.x, b.y, blockWidth, blockHeight, snakeColor));
+        drawBlock(ctx, food.x, food.y, blockWidth, blockHeight, foodColor);
+    }, [snake, food, nOfRows, nOfCols, foodColor, snakeColor]);
 
     return (
         <div>
