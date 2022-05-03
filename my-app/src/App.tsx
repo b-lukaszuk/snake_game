@@ -75,6 +75,8 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
 
     return (
         <div className="App">
+            <p>Snake length: {snake.length}</p>
+            <p>Food coordinates: {food.x}, {food.y}</p>
             <button onClick={() => setGameOver(true)}>End game</button>
             <Canvas snake={snake} food={food} />
         </div>
