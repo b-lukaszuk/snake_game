@@ -55,7 +55,7 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
             })
         }
         const setNewFood = (): void => {
-            setFood(getFreeRandBlock(0, config.nOfRows + 1, snake));
+            setFood(getFreeRandBlock(0, config.nOfRows, snake));
         }
 
         let timerId = setInterval(() => {
