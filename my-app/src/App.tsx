@@ -2,7 +2,7 @@ import React, { useState, useEffect, ReactElement } from "react";
 import Canvas from "./canvas/Canvas";
 import Block from "./interfaces/Block";
 import "./App.css";
-import { shiftSnake } from "./utils/shiftSnake";
+import { shiftBlock, shiftSnake } from "./utils/shiftSnake";
 import eatFood from "./utils/eatFood";
 import getFreeRandBlock from "./utils/getRandBlock";
 import Direction from "./types/Direction";
@@ -46,8 +46,9 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
                 return shiftSnake(prevSnake, moveDirection);
             });
         }
-        const didSnakeAteFood = (): boolean => {
-            return snake[0].x === food.x && snake[0].y === food.y;
+        const willSnakeEatFood = (): boolean => {
+            let newHead: Block = shiftBlock(snake[0], moveDirection);
+            return newHead.x === food.x && newHead.y === food.y;
         }
         const growSnake = (): void => {
             setSnake((prevSnake: Block[]) => {
@@ -59,11 +60,12 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
         }
 
         let timerId = setInterval(() => {
-            if (didSnakeAteFood()) {
+            if (willSnakeEatFood()) {
                 growSnake();
                 setNewFood();
+            } else {
+                moveSnake();
             }
-            moveSnake();
         }, 1000);
         if (gameOver) {
             clearInterval(timerId);
