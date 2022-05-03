@@ -88,7 +88,7 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
         return () => {
             clearInterval(timerId);
         };
-    }, [food, gameOver, moveDirection, snake]);
+    }, [food, gameOver, maxSnakeLength, moveDirection, snake]);
 
     return (
         <div className="App">
