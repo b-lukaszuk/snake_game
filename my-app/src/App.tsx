@@ -15,6 +15,7 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
     // x - no of row, y - no of col of canvas (see Canvas element)
     // x, y works similar to nrow, ncol in Python's pd.DataFrame
     const [snake, setSnake]: [Block[], Function] = useState(config.snake);
+    const maxSnakeLength: number = config.nOfRows * config.nOfCols;
     const [food, setFood]: [Block, Function] = useState(config.food);
     const [moveDirection, setMoveDirection]: [Direction, Function] = useState(
         Direction.Right
@@ -62,7 +63,8 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
         }
 
         const isGameOver = (): boolean => {
-            return willSnakeHitWall(snake, moveDirection, config.nOfRows) ||
+            return snake.length === maxSnakeLength ||
+                willSnakeHitWall(snake, moveDirection, config.nOfRows) ||
                 willSnakeEatItself(snake, moveDirection);
         }
 
