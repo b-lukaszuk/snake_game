@@ -2,7 +2,7 @@ import React, { useState, useEffect, ReactElement } from "react";
 import Canvas from "./canvas/Canvas";
 import Block from "./interfaces/Block";
 import "./App.css";
-import { shiftBlock, shiftSnake } from "./utils/shiftSnake";
+import { shiftSnake } from "./utils/shiftSnake";
 import eatFood from "./utils/eatFood";
 import getFreeRandBlock from "./utils/getRandBlock";
 import Direction from "./types/Direction";
@@ -41,24 +41,29 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
     }, []);
 
     useEffect(() => {
-        let timerId = setInterval(() => {
+        const moveSnake = (): void => {
             setSnake((prevSnake: Block[]) => {
                 return shiftSnake(prevSnake, moveDirection);
             });
-            let newSnakeHead: Block = shiftBlock(snake[0], moveDirection);
-            if (newSnakeHead.x === food.x && newSnakeHead.y === food.y) {
-                setSnake((prevSnake: Block[]) => {
-                    return eatFood(prevSnake, food);
-                });
-                console.log("newSnake:", snake);
-                setFood((prevFood: Block) => {
-                    return {
-                        prevFood,
-                        ...getFreeRandBlock(0, config.nOfRows + 1, snake),
-                    };
-                });
-                console.log("newFood", food);
+        }
+        const didSnakeAteFood = (): boolean => {
+            return snake[0].x === food.x && snake[0].y === food.y;
+        }
+        const growSnake = (): void => {
+            setSnake((prevSnake: Block[]) => {
+                return eatFood(prevSnake, food);
+            })
+        }
+        const setNewFood = (): void => {
+            setFood(getFreeRandBlock(0, config.nOfRows + 1, snake));
+        }
+
+        let timerId = setInterval(() => {
+            if (didSnakeAteFood()) {
+                growSnake();
+                setNewFood();
             }
+            moveSnake();
         }, 1000);
         if (gameOver) {
             clearInterval(timerId);
@@ -66,7 +71,7 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
         return () => {
             clearInterval(timerId);
         };
-    }, [food, moveDirection, snake, gameOver]);
+    }, [food, gameOver, moveDirection, snake]);
 
     return (
         <div className="App">
