@@ -1,4 +1,5 @@
 const config = {
+    // nOfRows === nOfCols
     "nOfRows": 5,
     "nOfCols": 5,
     "snake": [
