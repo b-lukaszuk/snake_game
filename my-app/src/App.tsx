@@ -5,6 +5,8 @@ import "./App.css";
 import { shiftBlock, shiftSnake } from "./utils/shiftSnake";
 import eatFood from "./utils/eatFood";
 import getFreeRandBlock from "./utils/getRandBlock";
+import willSnakeHitWall from "./utils/willSnakeHitWall";
+
 import Direction from "./types/Direction";
 import config from "./config/config";
 
@@ -20,7 +22,6 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
 
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
-            console.log("keypress detected:", event.key);
             if (event.key === "ArrowLeft") {
                 setMoveDirection(Direction.Left);
             }
@@ -60,16 +61,21 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
         }
 
         let timerId = setInterval(() => {
-            if (willSnakeEatFood()) {
-                growSnake();
-                setNewFood();
-            } else {
-                moveSnake();
+            if (!gameOver) {
+                if (willSnakeEatFood()) {
+                    growSnake();
+                    setNewFood();
+                } else {
+                    moveSnake();
+                }
+            }
+            if (willSnakeHitWall(snake, moveDirection, config.nOfRows)) {
+                setGameOver(true);
+            }
+            if (gameOver) {
+                clearInterval(timerId);
             }
         }, 1000);
-        if (gameOver) {
-            clearInterval(timerId);
-        }
         return () => {
             clearInterval(timerId);
         };
