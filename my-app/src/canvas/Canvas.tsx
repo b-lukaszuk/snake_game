@@ -21,8 +21,6 @@ const Canvas: React.FC<Props> = (props): ReactElement<HTMLElement> => {
     const foodColor: string = config.foodColor;
 
     useEffect(() => {
-        console.log("canvas snake:", snake);
-        console.log("canvas food", food);
         const canvas: HTMLCanvasElement | null = canvasRef.current;
         if (canvas === null) {
             return undefined;
