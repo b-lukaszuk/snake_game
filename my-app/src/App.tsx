@@ -6,6 +6,7 @@ import { shiftBlock, shiftSnake } from "./utils/shiftSnake";
 import eatFood from "./utils/eatFood";
 import getFreeRandBlock from "./utils/getRandBlock";
 import willSnakeHitWall from "./utils/willSnakeHitWall";
+import willSnakeEatItself from "./utils/willSnakeEatItself";
 
 import Direction from "./types/Direction";
 import config from "./config/config";
@@ -60,6 +61,11 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
             setFood(getFreeRandBlock(0, config.nOfRows, snake));
         }
 
+        const isGameOver = (): boolean => {
+            return willSnakeHitWall(snake, moveDirection, config.nOfRows) ||
+                willSnakeEatItself(snake, moveDirection);
+        }
+
         let timerId = setInterval(() => {
             if (!gameOver) {
                 if (willSnakeEatFood()) {
@@ -69,8 +75,9 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
                     moveSnake();
                 }
             }
-            if (willSnakeHitWall(snake, moveDirection, config.nOfRows)) {
+            if (isGameOver()) {
                 setGameOver(true);
+                alert("Game Over");
             }
             if (gameOver) {
                 clearInterval(timerId);
