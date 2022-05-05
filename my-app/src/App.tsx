@@ -24,24 +24,29 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
 
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
+            let newDirection: Direction = moveDirection;
             if (event.key === "ArrowLeft") {
-                setMoveDirection(Direction.Left);
+                newDirection = Direction.Left;
             }
             if (event.key === "ArrowUp") {
-                setMoveDirection(Direction.Up);
+                newDirection = Direction.Up;
             }
             if (event.key === "ArrowRight") {
-                setMoveDirection(Direction.Right);
+                newDirection = Direction.Right;
             }
             if (event.key === "ArrowDown") {
-                setMoveDirection(Direction.Down);
+                newDirection = Direction.Down;
+            }
+            if (newDirection !== moveDirection &&
+                Math.abs(newDirection - moveDirection) !== 9) {
+                setMoveDirection(newDirection);
             }
         };
         document.addEventListener("keydown", handleKeyDown);
         return () => {
             document.removeEventListener("keydown", handleKeyDown);
         };
-    }, []);
+    }, [moveDirection]);
 
     useEffect(() => {
         const moveSnake = (): void => {
