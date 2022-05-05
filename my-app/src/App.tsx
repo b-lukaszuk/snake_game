@@ -63,6 +63,9 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
                 return eatFood(prevSnake, food);
             })
         }
+        // TODO
+        // funkcja ustawiajaca newFood-a czasami ustawia go w miejscu oldFood-a
+        // ktory teraz jest nowa glowa weza (spradzic co i jak i naprawic)
         const setNewFood = (): void => {
             setFood(getFreeRandBlock(0, config.nOfRows, snake));
         }
