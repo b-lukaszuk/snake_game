@@ -103,7 +103,7 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
         <div className="App">
             <p>Snake length: {snake.length}</p>
             <p>Food coordinates: {food.x}, {food.y}</p>
-            <button onClick={() => setGameOver(true)}>End game</button>
+            <button onClick={() => setGameOver((pgo: boolean) => !pgo)}>(un)pause game</button>
             <Canvas snake={snake} food={food} />
         </div>
     );
