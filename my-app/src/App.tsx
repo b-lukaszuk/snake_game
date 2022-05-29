@@ -89,8 +89,6 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
                 setGameOver(true);
                 clearInterval(timerId);
                 alert("Game Over");
-            }
-            if (gameOver) {
                 clearInterval(timerId);
             }
         }, 1000);
