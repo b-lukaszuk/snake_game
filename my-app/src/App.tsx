@@ -62,11 +62,8 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
                 return eatFood(prevSnake, food);
             })
         }
-        // TODO
-        // funkcja ustawiajaca newFood-a czasami ustawia go w miejscu oldFood-a
-        // ktory teraz jest nowa glowa weza (spradzic co i jak i naprawic)
-        const setNewFood = (): void => {
-            setFood(getFreeRandBlock(0, config.nOfRows, snake));
+        const setNewFood = (newSnake: Block[]): void => {
+            setFood(getFreeRandBlock(0, config.nOfRows, newSnake));
         }
 
         const isGameOver = (): boolean => {
@@ -77,8 +74,9 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
         let timerId = setInterval(() => {
             if (!gameOver) {
                 if (willSnakeEatFood()) {
+                    // necessary, because of about 1 frame delay
+                    setNewFood(eatFood(snake, food));
                     growSnake();
-                    setNewFood();
                 } else {
                     moveSnake();
                 }
@@ -86,6 +84,7 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
             if (isGameOver()) {
                 setGameOver(true);
                 clearInterval(timerId);
+                alert("Game Over");
             }
         }, 1000);
         return () => {
