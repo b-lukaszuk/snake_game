@@ -20,6 +20,7 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
         Direction.Right
     );
     const [gameOver, setGameOver]: [boolean, Function] = useState(false);
+    const [score, setScore]: [number, Function] = useState(snake.length);
     const maxSnakeLength: number = config.nOfRows * config.nOfCols;
 
     useEffect(() => {
@@ -84,10 +85,12 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
                     // otherwise while loop in getFreeRandBlock (in setNewFood)
                     // is infinite
                     if (snake.length === (maxSnakeLength - 1)) {
+                        setScore((prevScore: number) => prevScore + 1);
                         setGameOver(true);
                     } else {
                         // necessary, because of about 1 frame delay
                         // otherwise, new food may come in head
+                        setScore((prevScore: number) => prevScore + 1);
                         setNewFood(eatFood(snake, food));
                         growSnake();
                     }
@@ -104,8 +107,7 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
     return (
         <div className="App">
             <p><b>Game status: </b> {gameOver ? "game over" : "in progress"}</p>
-            <p>Snake length: {snake.length}</p>
-            <p>Food coordinates: {food.x}, {food.y}</p>
+            <p><b>Score: </b>{score}</p>
             <button onClick={() => setGameOver((pgo: boolean) => !pgo)}>(un)pause game</button>
             <Canvas snake={snake} food={food} />
         </div>
