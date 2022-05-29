@@ -88,8 +88,6 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
             if (isGameOver()) {
                 setGameOver(true);
                 clearInterval(timerId);
-                alert("Game Over");
-                clearInterval(timerId);
             }
         }, 1000);
         return () => {
@@ -99,6 +97,7 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
 
     return (
         <div className="App">
+            <p><b>Game status: </b> {gameOver ? "game over" : "in progress"}</p>
             <p>Snake length: {snake.length}</p>
             <p>Food coordinates: {food.x}, {food.y}</p>
             <button onClick={() => setGameOver((pgo: boolean) => !pgo)}>(un)pause game</button>
