@@ -20,6 +20,7 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
         Direction.Right
     );
     const [gameOver, setGameOver]: [boolean, Function] = useState(false);
+    const maxSnakeLength: number = config.nOfRows * config.nOfCols;
 
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
@@ -72,25 +73,33 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
         }
 
         let timerId = setInterval(() => {
-            if (!gameOver) {
+            if (isGameOver()) {
+                setGameOver(true);
+            }
+            if (gameOver) {
+                clearInterval(timerId);
+                alert("Game Over");
+            } else {
                 if (willSnakeEatFood()) {
-                    // necessary, because of about 1 frame delay
-                    setNewFood(eatFood(snake, food));
-                    growSnake();
+                    // otherwise while loop in getFreeRandBlock (in setNewFood)
+                    // is infinite
+                    if (snake.length === (maxSnakeLength - 1)) {
+                        setGameOver(true);
+                    } else {
+                        // necessary, because of about 1 frame delay
+                        // otherwise, new food may come in head
+                        setNewFood(eatFood(snake, food));
+                        growSnake();
+                    }
                 } else {
                     moveSnake();
                 }
-            }
-            if (isGameOver()) {
-                setGameOver(true);
-                clearInterval(timerId);
-                alert("Game Over");
             }
         }, 1000);
         return () => {
             clearInterval(timerId);
         };
-    }, [food, gameOver, moveDirection, snake]);
+    }, [food, gameOver, moveDirection, maxSnakeLength, snake]);
 
     return (
         <div className="App">
