@@ -1,5 +1,6 @@
 import React, { ReactElement, useEffect, useRef } from "react";
 import setCanvasDefaults from "./draw/setCanvasDefaults";
+import displayGameOver from "./draw/displayGameOver";
 import drawBlock from "./draw/drawBlock";
 import Block from "../interfaces/Block";
 import config from "../config/config";
@@ -9,12 +10,14 @@ import "./Canvas.css";
 interface Props {
     snake: Block[];
     food: Block;
+    isGameOver: boolean;
 }
 
 const Canvas: React.FC<Props> = (props): ReactElement<HTMLElement> => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
     const snake: Block[] = props.snake;
     const food: Block = props.food;
+    const isGameOver: boolean = props.isGameOver;
     const nOfRows: number = config.nOfRows;
     const nOfCols: number = config.nOfCols;
     const snakeColor: string = config.snakeColor;
@@ -36,7 +39,11 @@ const Canvas: React.FC<Props> = (props): ReactElement<HTMLElement> => {
             drawBlock(ctx, b.x, b.y, blockWidth, blockHeight, snakeColor)
         );
         drawBlock(ctx, food.x, food.y, blockWidth, blockHeight, foodColor);
-    }, [snake, food, nOfRows, nOfCols, foodColor, snakeColor]);
+
+        if (isGameOver) {
+            displayGameOver(ctx, canvas);
+        }
+    }, [snake, food, nOfRows, nOfCols, foodColor, snakeColor, isGameOver]);
 
     return (
         <div>
