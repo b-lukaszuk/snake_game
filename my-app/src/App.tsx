@@ -107,7 +107,7 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
         <div className="App">
             <p><b>Game status: </b> {gameOver ? "game over" : "in progress"}</p>
             <p><b>Score: </b>{score}</p>
-            <button onClick={() => setGameOver((pgo: boolean) => !pgo)}>(un)pause game</button>
+            <button onClick={() => setGameOver(false)}>start game</button>
             <Canvas snake={snake} food={food} isGameOver={gameOver} />
         </div>
     );
