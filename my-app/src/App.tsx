@@ -132,6 +132,7 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
                     start game
                 </button>
             )}
+            <br /> <br />
             <Canvas snake={snake} food={food} isGameOver={gameOver} score={score} />
         </div>
     );
