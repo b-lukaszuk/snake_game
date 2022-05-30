@@ -11,6 +11,7 @@ interface Props {
     snake: Block[];
     food: Block;
     isGameOver: boolean;
+    score: number;
 }
 
 const Canvas: React.FC<Props> = (props): ReactElement<HTMLElement> => {
@@ -18,6 +19,7 @@ const Canvas: React.FC<Props> = (props): ReactElement<HTMLElement> => {
     const snake: Block[] = props.snake;
     const food: Block = props.food;
     const isGameOver: boolean = props.isGameOver;
+    const score: number = props.score;
     const nOfRows: number = config.nOfRows;
     const nOfCols: number = config.nOfCols;
     const snakeColor: string = config.snakeColor;
@@ -41,9 +43,9 @@ const Canvas: React.FC<Props> = (props): ReactElement<HTMLElement> => {
         drawBlock(ctx, food.x, food.y, blockWidth, blockHeight, foodColor);
 
         if (isGameOver) {
-            displayGameOver(ctx, canvas);
+            displayGameOver(ctx, canvas, score);
         }
-    }, [snake, food, nOfRows, nOfCols, foodColor, snakeColor, isGameOver]);
+    }, [snake, food, nOfRows, nOfCols, foodColor, snakeColor, isGameOver, score]);
 
     return (
         <div>

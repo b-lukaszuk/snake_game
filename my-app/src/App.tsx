@@ -50,6 +50,11 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
     }, [moveDirection]);
 
     useEffect(() => {
+        const initializeGame = (): void => {
+            setSnake(config.snake);
+            setFood(config.food);
+            setMoveDirection(Direction.Right);
+        }
         const moveSnake = (): void => {
             setSnake((prevSnake: Block[]) => {
                 return shiftSnake(prevSnake, moveDirection);
@@ -76,6 +81,7 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
         let timerId = setInterval(() => {
             if (gameOver) {
                 clearInterval(timerId);
+                initializeGame();
             } else {
                 if (willSnakeEatFood()) {
                     // otherwise while loop in getFreeRandBlock (in setNewFood)
@@ -101,14 +107,15 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
         return () => {
             clearInterval(timerId);
         };
-    }, [food, gameOver, moveDirection, maxSnakeLength, snake]);
+    }, [food, gameOver, moveDirection, maxSnakeLength, snake, score]);
 
     return (
         <div className="App">
             <p><b>Game status: </b> {gameOver ? "game over" : "in progress"}</p>
             <p><b>Score: </b>{score}</p>
-            <button onClick={() => setGameOver(false)}>start game</button>
-            <Canvas snake={snake} food={food} isGameOver={gameOver} />
+            {gameOver && <button onClick={() => { setScore(snake.length); setGameOver(false) }}>start game</button>}
+            <Canvas snake={snake} food={food} isGameOver={gameOver}
+                score={score} />
         </div>
     );
 };
