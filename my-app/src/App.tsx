@@ -19,7 +19,7 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
     const [moveDirection, setMoveDirection]: [Direction, Function] = useState(
         Direction.Right
     );
-    const [gameOver, setGameOver]: [boolean, Function] = useState(false);
+    const [gameOver, setGameOver]: [boolean, Function] = useState(true);
     const [score, setScore]: [number, Function] = useState(snake.length);
     const maxSnakeLength: number = config.nOfRows * config.nOfCols;
 
@@ -74,12 +74,8 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
         }
 
         let timerId = setInterval(() => {
-            if (isGameOver()) {
-                setGameOver(true);
-            }
             if (gameOver) {
                 clearInterval(timerId);
-                alert("Game Over");
             } else {
                 if (willSnakeEatFood()) {
                     // otherwise while loop in getFreeRandBlock (in setNewFood)
@@ -97,6 +93,9 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
                 } else {
                     moveSnake();
                 }
+            }
+            if (isGameOver()) {
+                setGameOver(true);
             }
         }, 1000);
         return () => {
