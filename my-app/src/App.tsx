@@ -38,8 +38,10 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
             if (event.key === "ArrowDown") {
                 newDirection = Direction.Down;
             }
-            if (newDirection !== moveDirection &&
-                Math.abs(newDirection - moveDirection) !== 9) {
+            if (
+                newDirection !== moveDirection &&
+                Math.abs(newDirection - moveDirection) !== 9
+            ) {
                 setMoveDirection(newDirection);
             }
         };
@@ -54,29 +56,31 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
             setSnake(config.snake);
             setFood(config.food);
             setMoveDirection(Direction.Right);
-        }
+        };
         const moveSnake = (): void => {
             setSnake((prevSnake: Block[]) => {
                 return shiftSnake(prevSnake, moveDirection);
             });
-        }
+        };
         const willSnakeEatFood = (): boolean => {
             let newHead: Block = shiftBlock(snake[0], moveDirection);
             return newHead.x === food.x && newHead.y === food.y;
-        }
+        };
         const growSnake = (): void => {
             setSnake((prevSnake: Block[]) => {
                 return eatFood(prevSnake, food);
-            })
-        }
+            });
+        };
         const setNewFood = (newSnake: Block[]): void => {
             setFood(getFreeRandBlock(0, config.nOfRows, newSnake));
-        }
+        };
 
         const isGameOver = (): boolean => {
-            return (willSnakeHitWall(snake, moveDirection, config.nOfRows) ||
-                willSnakeEatItself(snake, moveDirection));
-        }
+            return (
+                willSnakeHitWall(snake, moveDirection, config.nOfRows) ||
+                willSnakeEatItself(snake, moveDirection)
+            );
+        };
 
         let timerId = setInterval(() => {
             if (gameOver) {
@@ -86,7 +90,7 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
                 if (willSnakeEatFood()) {
                     // otherwise while loop in getFreeRandBlock (in setNewFood)
                     // is infinite
-                    if (snake.length === (maxSnakeLength - 1)) {
+                    if (snake.length === maxSnakeLength - 1) {
                         setScore((prevScore: number) => prevScore + 1);
                         setGameOver(true);
                     } else {
@@ -111,11 +115,24 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
 
     return (
         <div className="App">
-            <p><b>Game status: </b> {gameOver ? "game over" : "in progress"}</p>
-            <p><b>Score: </b>{score}</p>
-            {gameOver && <button onClick={() => { setScore(snake.length); setGameOver(false) }}>start game</button>}
-            <Canvas snake={snake} food={food} isGameOver={gameOver}
-                score={score} />
+            <p>
+                <b>Game status: </b> {gameOver ? "game over" : "in progress"}
+            </p>
+            <p>
+                <b>Score: </b>
+                {score}
+            </p>
+            {gameOver && (
+                <button
+                    onClick={() => {
+                        setScore(snake.length);
+                        setGameOver(false);
+                    }}
+                >
+                    start game
+                </button>
+            )}
+            <Canvas snake={snake} food={food} isGameOver={gameOver} score={score} />
         </div>
     );
 };
