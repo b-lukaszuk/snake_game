@@ -1,5 +1,5 @@
 import React, { useState, useEffect, ReactElement } from "react";
-import Canvas from "./canvas/Canvas";
+import Canvas from "./components/canvas/Canvas";
 import Block from "./interfaces/Block";
 import "./App.css";
 import { shiftBlock, shiftSnake } from "./utils/shiftSnake";
@@ -107,7 +107,7 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
             if (isGameOver()) {
                 setGameOver(true);
             }
-        }, 1000);
+        }, 600);
         return () => {
             clearInterval(timerId);
         };

@@ -2,8 +2,8 @@ import React, { ReactElement, useEffect, useRef } from "react";
 import setCanvasDefaults from "./draw/setCanvasDefaults";
 import displayGameOver from "./draw/displayGameOver";
 import drawBlock from "./draw/drawBlock";
-import Block from "../interfaces/Block";
-import config from "../config/config";
+import Block from "../..//interfaces/Block";
+import config from "../../config/config";
 
 import "./Canvas.css";
 
