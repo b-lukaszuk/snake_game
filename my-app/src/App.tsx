@@ -23,7 +23,13 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
     );
     const [gameOver, setGameOver]: [boolean, Function] = useState(true);
     const [score, setScore]: [number, Function] = useState(snake.length);
+    const [delay, setDelay]: [number, Function] = useState(config.delay);
     const maxSnakeLength: number = config.nOfRows * config.nOfCols;
+
+    const startClickHandler = (): void => {
+        setScore(snake.length);
+        setGameOver(false);
+    }
 
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
@@ -109,23 +115,18 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
             if (isGameOver()) {
                 setGameOver(true);
             }
-        }, 600);
+        }, delay);
         return () => {
             clearInterval(timerId);
         };
-    }, [food, gameOver, moveDirection, maxSnakeLength, snake, score]);
+    }, [delay, food, gameOver, maxSnakeLength, moveDirection, score, snake]);
 
     return (
         <div className="App">
             <Instructions />
             <GameStatus isGameOver={gameOver} score={score} />
             {gameOver && (
-                <button
-                    onClick={() => {
-                        setScore(snake.length);
-                        setGameOver(false);
-                    }}
-                >
+                <button onClick={startClickHandler}>
                     start game
                 </button>
             )}
