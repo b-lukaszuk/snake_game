@@ -10,10 +10,12 @@ import GameStatus from "./components/GameStatus";
 import getFreeRandBlock from "./utils/getRandBlock";
 import Instructions from "./components/Instructions";
 import { shiftBlock, shiftSnake } from "./utils/shiftSnake";
+import SpedLevelSelector from "./components/SpeedLevelSelector";
 import willSnakeHitWall from "./utils/willSnakeHitWall";
 import willSnakeEatItself from "./utils/willSnakeEatItself";
 
 import "./App.css";
+import SpeedLevelSelector from "./components/SpeedLevelSelector";
 
 const App: React.FC = (): ReactElement<HTMLElement> => {
     // x - no of row, y - no of col of canvas (see Canvas element)
@@ -131,6 +133,8 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
         <div className="App">
             <Instructions />
             <GameStatus isGameOver={gameOver} score={score} />
+            {gameOver && <SpeedLevelSelector />}
+            <br />
             {gameOver && <Button onClick={startClickHandler} displText={"start game"} />}
             <br /> <br />
             <Canvas snake={snake} food={food} isGameOver={gameOver} score={score} />
