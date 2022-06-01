@@ -91,10 +91,14 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
             );
         };
 
+        const onGameOver = (): void => {
+            clearInterval(timerId);
+            initializeGame();
+        }
+
         let timerId = setInterval(() => {
             if (gameOver) {
-                clearInterval(timerId);
-                initializeGame();
+                onGameOver();
             } else {
                 if (willSnakeEatFood()) {
                     // otherwise while loop in getFreeRandBlock (in setNewFood)
