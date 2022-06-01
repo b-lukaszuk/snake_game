@@ -9,6 +9,7 @@ import willSnakeHitWall from "./utils/willSnakeHitWall";
 import willSnakeEatItself from "./utils/willSnakeEatItself";
 import Instructions from "./components/Instructions";
 import GameStatus from "./components/GameStatus";
+import Button from "./components/Button";
 
 import Direction from "./types/Direction";
 import config from "./config/config";
@@ -125,11 +126,7 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
         <div className="App">
             <Instructions />
             <GameStatus isGameOver={gameOver} score={score} />
-            {gameOver && (
-                <button onClick={startClickHandler}>
-                    start game
-                </button>
-            )}
+            {gameOver && <Button onClick={startClickHandler} displText={"start game"} />}
             <br /> <br />
             <Canvas snake={snake} food={food} isGameOver={gameOver} score={score} />
         </div>
