@@ -7,6 +7,7 @@ import eatFood from "./utils/eatFood";
 import getFreeRandBlock from "./utils/getRandBlock";
 import willSnakeHitWall from "./utils/willSnakeHitWall";
 import willSnakeEatItself from "./utils/willSnakeEatItself";
+import Instructions from "./components/Instructions";
 
 import Direction from "./types/Direction";
 import config from "./config/config";
@@ -122,16 +123,7 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
                 <b>Score: </b>
                 {score}
             </p>
-            <p>
-                <b>Instructions: </b>
-                <br />
-                Click the button to start the game.
-                <br />
-                Use arrow keys (&#8592; &#8593; &#8594; &#8595;) to change the direction
-                of the snake.
-                <br />
-                Collect food. Avoid collision with the walls and the snake's body.
-            </p>
+            <Instructions />
             {gameOver && (
                 <button
                     onClick={() => {
