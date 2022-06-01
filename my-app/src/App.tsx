@@ -8,6 +8,7 @@ import getFreeRandBlock from "./utils/getRandBlock";
 import willSnakeHitWall from "./utils/willSnakeHitWall";
 import willSnakeEatItself from "./utils/willSnakeEatItself";
 import Instructions from "./components/Instructions";
+import GameStatus from "./components/GameStatus";
 
 import Direction from "./types/Direction";
 import config from "./config/config";
@@ -116,14 +117,8 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
 
     return (
         <div className="App">
-            <p>
-                <b>Game status: </b> {gameOver ? "game over" : "in progress"}
-            </p>
-            <p>
-                <b>Score: </b>
-                {score}
-            </p>
             <Instructions />
+            <GameStatus isGameOver={gameOver} score={score} />
             {gameOver && (
                 <button
                     onClick={() => {
