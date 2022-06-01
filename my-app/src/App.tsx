@@ -1,18 +1,19 @@
 import React, { useState, useEffect, ReactElement } from "react";
-import Canvas from "./components/canvas/Canvas";
+
 import Block from "./interfaces/Block";
-import "./App.css";
-import { shiftBlock, shiftSnake } from "./utils/shiftSnake";
+import Button from "./components/Button";
+import config from "./config/config";
+import Canvas from "./components/canvas/Canvas";
+import Direction from "./types/Direction";
 import eatFood from "./utils/eatFood";
+import GameStatus from "./components/GameStatus";
 import getFreeRandBlock from "./utils/getRandBlock";
+import Instructions from "./components/Instructions";
+import { shiftBlock, shiftSnake } from "./utils/shiftSnake";
 import willSnakeHitWall from "./utils/willSnakeHitWall";
 import willSnakeEatItself from "./utils/willSnakeEatItself";
-import Instructions from "./components/Instructions";
-import GameStatus from "./components/GameStatus";
-import Button from "./components/Button";
 
-import Direction from "./types/Direction";
-import config from "./config/config";
+import "./App.css";
 
 const App: React.FC = (): ReactElement<HTMLElement> => {
     // x - no of row, y - no of col of canvas (see Canvas element)
