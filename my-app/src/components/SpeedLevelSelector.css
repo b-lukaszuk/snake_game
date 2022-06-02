@@ -3,6 +3,10 @@ fieldset {
     max-width: 20em;
 }
 
+fieldset span {
+    padding: 0.5em;
+}
+
 fieldset input[type="radio"] {
     height: 1.2em;
     width: 1.2em;

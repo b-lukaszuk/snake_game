@@ -6,6 +6,7 @@ function displayGameOver(ctx: CanvasRenderingContext2D,
     ctx.font = `${fontSize}px Arial`;
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
+    ctx.fillStyle = "#ff3333";
     ctx.fillText("Game Over", (canv.width / 2),
         (canv.height / 2) - parseInt(fontSize));
     ctx.fillText(`Score: ${score}`,
