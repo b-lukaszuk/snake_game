@@ -141,18 +141,16 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
         <div className="App">
             <Instructions />
             <GameStatus isGameOver={gameOver} score={score} />
+            <Canvas snake={snake} food={food} isGameOver={gameOver} score={score} />
+            {gameOver && (
+                <Button onClick={startClickHandler} displText={"start game"} />
+            )}
             {gameOver && (
                 <SpeedLevelSelector
                     choices={delays}
                     actionOnSelect={radioSelectHandler}
                 />
             )}
-            <br />
-            {gameOver && (
-                <Button onClick={startClickHandler} displText={"start game"} />
-            )}
-            <br /> <br />
-            <Canvas snake={snake} food={food} isGameOver={gameOver} score={score} />
         </div>
     );
 };
