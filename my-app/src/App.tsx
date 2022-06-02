@@ -9,13 +9,13 @@ import eatFood from "./utils/eatFood";
 import GameStatus from "./components/GameStatus";
 import getFreeRandBlock from "./utils/getRandBlock";
 import Instructions from "./components/Instructions";
+import IRadioChoice from "./interfaces/IRadioChoice";
 import { shiftBlock, shiftSnake } from "./utils/shiftSnake";
-import SpedLevelSelector from "./components/SpeedLevelSelector";
+import SpeedLevelSelector from "./components/SpeedLevelSelector";
 import willSnakeHitWall from "./utils/willSnakeHitWall";
 import willSnakeEatItself from "./utils/willSnakeEatItself";
 
 import "./App.css";
-import SpeedLevelSelector from "./components/SpeedLevelSelector";
 
 const App: React.FC = (): ReactElement<HTMLElement> => {
     // x - no of row, y - no of col of canvas (see Canvas element)
@@ -30,10 +30,20 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
     const [delay, setDelay]: [number, Function] = useState(config.delay);
     const maxSnakeLength: number = config.nOfRows * config.nOfCols;
 
+    const delays: IRadioChoice[] = [
+        { id: 0, name: "Kindergarten", delay: 1000 },
+        { id: 1, name: "School", delay: 800 },
+        { id: 2, name: "College", delay: 600 },
+    ];
+
     const startClickHandler = (): void => {
         setScore(snake.length);
         setGameOver(false);
-    }
+    };
+
+    const radioSelectHandler = (chosenDelay: number): void => {
+        setDelay(chosenDelay);
+    };
 
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
@@ -97,7 +107,7 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
         const onGameOver = (): void => {
             clearInterval(timerId);
             initializeGame();
-        }
+        };
 
         let timerId = setInterval(() => {
             if (gameOver) {
@@ -133,9 +143,16 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
         <div className="App">
             <Instructions />
             <GameStatus isGameOver={gameOver} score={score} />
-            {gameOver && <SpeedLevelSelector />}
+            {gameOver && (
+                <SpeedLevelSelector
+                    choices={delays}
+                    actionOnSelect={radioSelectHandler}
+                />
+            )}
             <br />
-            {gameOver && <Button onClick={startClickHandler} displText={"start game"} />}
+            {gameOver && (
+                <Button onClick={startClickHandler} displText={"start game"} />
+            )}
             <br /> <br />
             <Canvas snake={snake} food={food} isGameOver={gameOver} score={score} />
         </div>
