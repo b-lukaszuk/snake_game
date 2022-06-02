@@ -10,7 +10,7 @@ const config = {
     "snakeColor": "blue",
     "food": { "x": 3, "y": 3 },
     "foodColor": "red",
-    "delay": 600,
+    "delay": 1000,
 }
 
 export default config;
