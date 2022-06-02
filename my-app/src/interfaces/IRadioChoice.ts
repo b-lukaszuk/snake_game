@@ -1,7 +1,7 @@
 interface IRadioChoice {
     id: number;
     name: string;
-    value: number;
+    delay: number;
 }
 
 export default IRadioChoice;
