@@ -1,4 +1,4 @@
-// it draws snake by indexing the fields like rows and cols in
+// it draws snake by indexing the fields like rows and cols like in
 // Python's pd.DataFrame object
 function drawBlock(ctx: CanvasRenderingContext2D,
     rowId: number, colId: number,
