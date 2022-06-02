@@ -1,30 +1,31 @@
 import React, { ReactElement, useEffect, useRef } from "react";
-import setCanvasDefaults from "./draw/setCanvasDefaults";
-import displayGameOver from "./draw/displayGameOver";
-import drawBlock from "./draw/drawBlock";
+
 import Block from "../..//interfaces/Block";
 import config from "../../config/config";
+import displayGameOver from "./draw/displayGameOver";
+import drawBlock from "./draw/drawBlock";
+import setCanvasDefaults from "./draw/setCanvasDefaults";
 
 import "./Canvas.css";
 
 interface Props {
-    snake: Block[];
     food: Block;
     isGameOver: boolean;
     score: number;
+    snake: Block[];
 }
 
 const Canvas: React.FC<Props> = (props): ReactElement<HTMLElement> => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
-    const snake: Block[] = props.snake;
     const food: Block = props.food;
+    const foodColor: string = config.foodColor;
     const isGameOver: boolean = props.isGameOver;
+    const nOfCols: number = config.nOfCols;
+    const nOfRows: number = config.nOfRows;
     const score: number = props.score;
     // x, y coordinates work similarly to nrow, ncol in Python's pd.DataFrame indexing
-    const nOfRows: number = config.nOfRows;
-    const nOfCols: number = config.nOfCols;
+    const snake: Block[] = props.snake;
     const snakeColor: string = config.snakeColor;
-    const foodColor: string = config.foodColor;
 
     useEffect(() => {
         const canvas: HTMLCanvasElement | null = canvasRef.current;
