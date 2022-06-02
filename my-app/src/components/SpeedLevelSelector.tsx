@@ -20,12 +20,6 @@ const SpeedLevelSelector: React.FC<Props> = (
     );
 
     const getRadio = (choice: IRadioChoice): ReactElement<HTMLElement> => {
-        console.log("rendering new radio element", choice.name);
-        console.log("markedRadioVal is", markedRadioVal);
-        console.log(
-            "markedRadioVal === rendered element",
-            markedRadioVal === choice.name
-        );
         return (
             <span key={choice.id}>
                 <input
