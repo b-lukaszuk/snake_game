@@ -18,23 +18,20 @@ import willSnakeEatItself from "./utils/willSnakeEatItself";
 import "./App.css";
 
 const App: React.FC = (): ReactElement<HTMLElement> => {
-    // x - no of row, y - no of col of canvas (see Canvas element)
-    // x, y works similar to nrow, ncol in Python's pd.DataFrame
-    const [snake, setSnake]: [Block[], Function] = useState(config.snake);
-    const [food, setFood]: [Block, Function] = useState(config.food);
-    const [moveDirection, setMoveDirection]: [Direction, Function] = useState(
-        Direction.Right
-    );
-    const [gameOver, setGameOver]: [boolean, Function] = useState(true);
-    const [score, setScore]: [number, Function] = useState(snake.length);
     const [delay, setDelay]: [number, Function] = useState(config.delay);
-    const maxSnakeLength: number = config.nOfRows * config.nOfCols;
-
     const delays: IRadioChoice[] = [
         { id: 0, name: "Kindergarten", delay: 1000 },
         { id: 1, name: "School", delay: 800 },
         { id: 2, name: "College", delay: 600 },
     ];
+    const [food, setFood]: [Block, Function] = useState(config.food);
+    const [gameOver, setGameOver]: [boolean, Function] = useState(true);
+    const maxSnakeLength: number = config.nOfRows * config.nOfCols;
+    const [moveDirection, setMoveDirection]: [Direction, Function] = useState(
+        Direction.Right
+    );
+    const [snake, setSnake]: [Block[], Function] = useState(config.snake);
+    const [score, setScore]: [number, Function] = useState(snake.length);
 
     const startClickHandler = (): void => {
         setScore(snake.length);
@@ -120,7 +117,8 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
                         setScore((prevScore: number) => prevScore + 1);
                         setGameOver(true);
                     } else {
-                        // necessary, because of about 1 frame delay
+                        // necessary,
+                        // rendering is lagging about 1 frame behind code
                         // otherwise, new food may come in head
                         setScore((prevScore: number) => prevScore + 1);
                         setNewFood(eatFood(snake, food));
