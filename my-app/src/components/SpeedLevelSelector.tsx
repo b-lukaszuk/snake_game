@@ -16,7 +16,7 @@ const SpeedLevelSelector: React.FC<Props> = (
     const actionOnSelect: (chosenDelay: number) => void = props.actionOnSelect;
 
     const [markedRadioVal, setMarkedRadioVal]: [string, Function] = useState(
-        choices[1].name
+        choices[0].name
     );
 
     const getRadio = (choice: IRadioChoice): ReactElement<HTMLElement> => {
@@ -26,30 +26,19 @@ const SpeedLevelSelector: React.FC<Props> = (
                     type="radio"
                     value={choice.name}
                     name="speed"
-                    onChange={onSelect}
+                    onChange={() => onSelect(choice)}
                     checked={markedRadioVal === choice.name}
                 />
-                <label
-                    htmlFor={choice.name}
-                    onClick={() => {
-                        setMarkedRadioVal(choice.name);
-                        actionOnSelect(choice.delay);
-                    }}
-                >
+                <label htmlFor={choice.name} onClick={() => onSelect(choice)}>
                     {choice.name}
                 </label>
             </span>
         );
     };
 
-    const onSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-        e.preventDefault();
-        setMarkedRadioVal(e.target.value);
-        choices.forEach((c) => {
-            if (c.name === markedRadioVal) {
-                actionOnSelect(c.delay);
-            }
-        });
+    const onSelect = (choice: IRadioChoice): void => {
+        setMarkedRadioVal(choice.name);
+        actionOnSelect(choice.delay);
     };
 
     return (
