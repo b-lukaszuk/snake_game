@@ -2,9 +2,8 @@ const config = {
     "delay": 1000,
     "food": { "x": 3, "y": 3 },
     "foodColor": "red",
-    // important condition: nOfRows === nOfCols
+    // important condition: nOfRows is always equal to nOfCols (gameField is square)
     "nOfRows": 5,
-    "nOfCols": 5,
     // x, y coordinates work similarly to nrow, ncol in Python's pd.DataFrame indexing
     "snake": [
         { "x": 0, "y": 2 },
