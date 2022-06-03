@@ -12,10 +12,9 @@ const GameStatus: React.FC<Props> = (props): ReactElement<HTMLElement> => {
     return (
         <div>
             <p>
-                <b>Game status: </b> {isGameOver ? "Game Over" : "In Progress"}
-            </p>
-            <p>
                 <b>Score: </b> {score}
+                &nbsp; | &nbsp;
+                <b>Game status: </b> {isGameOver ? "Game Over" : "In Progress"}
             </p>
         </div>
     )
