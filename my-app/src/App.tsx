@@ -28,7 +28,9 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
     const [gameOver, setGameOver]: [boolean, Function] = useState(true);
     // nRows is always equal nCols
     const [nRows, setNrows]: [number, Function] = useState(config.nOfRows);
-    const maxSnakeLength: number = nRows;
+    const [maxSnakeLength, setMaxSnakeLength]: [number, Function] = useState(
+        nRows * nRows
+    )
     const [moveDirection, setMoveDirection]: [Direction, Function] = useState(
         Direction.Right
     );
