@@ -41,10 +41,12 @@ const RadioSelect: React.FC<Props> = (
     };
 
     return (
-        <fieldset>
-            <legend>{mainLabel}</legend>
-            {choices.map((c) => getRadio(c))}
-        </fieldset>
+        <form action="">
+            <fieldset>
+                <legend>{mainLabel}</legend>
+                {choices.map((c) => getRadio(c))}
+            </fieldset>
+        </form>
     );
 };
 
