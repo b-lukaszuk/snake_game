@@ -5,10 +5,13 @@ function drawBlock(ctx: CanvasRenderingContext2D,
     blockWidth: number, blockHeight: number,
     color: string = "blue"): void {
 
+    let blockMargin: number = Math.round(blockWidth * 0.05);
+
     ctx.fillStyle = color;
     let xStartPx: number = (rowId * blockHeight) + 1; // upper left corner
     let yStartPx: number = (colId * blockWidth) + 1; // upper left corner
-    ctx.fillRect(yStartPx, xStartPx, blockWidth - 2, blockHeight - 2);
+    ctx.fillRect(yStartPx, xStartPx, blockWidth - blockMargin,
+        blockHeight - blockMargin);
 }
 
 export default drawBlock;
