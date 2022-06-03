@@ -152,6 +152,7 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
                 nRows={nRows} />
             {gameOver && (
                 <RadioSelect
+                    mainLabel={"Choose speed level"}
                     choices={delays}
                     selectedChoice={delay}
                     actionOnSelect={radioSelectHandler}

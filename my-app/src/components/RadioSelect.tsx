@@ -5,6 +5,7 @@ import IRadioChoice from "../interfaces/IRadioChoice";
 import "./RadioSelect.css";
 
 interface Props {
+    mainLabel: string;
     choices: IRadioChoice[];
     selectedChoice: number;
     actionOnSelect: (chosenValue: number) => void;
@@ -13,6 +14,7 @@ interface Props {
 const RadioSelect: React.FC<Props> = (
     props
 ): ReactElement<HTMLElement> => {
+    const mainLabel: string = props.mainLabel;
     const choices: IRadioChoice[] = props.choices;
     const selectedChoice: number = props.selectedChoice;
     const actionOnSelect: (chosenValue: number) => void = props.actionOnSelect;
@@ -40,7 +42,7 @@ const RadioSelect: React.FC<Props> = (
 
     return (
         <fieldset>
-            <legend>Choose speed level</legend>
+            <legend>{mainLabel}</legend>
             {choices.map((c) => getRadio(c))}
         </fieldset>
     );
