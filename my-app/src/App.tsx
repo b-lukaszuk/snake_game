@@ -26,7 +26,9 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
     ];
     const [food, setFood]: [Block, Function] = useState(config.food);
     const [gameOver, setGameOver]: [boolean, Function] = useState(true);
-    const maxSnakeLength: number = config.nOfRows * config.nOfCols;
+    // nRows is always equal nCols
+    const [nRows, setNrows]: [number, Function] = useState(config.nOfRows);
+    const maxSnakeLength: number = nRows;
     const [moveDirection, setMoveDirection]: [Direction, Function] = useState(
         Direction.Right
     );
@@ -91,12 +93,12 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
             });
         };
         const setNewFood = (newSnake: Block[]): void => {
-            setFood(getFreeRandBlock(0, config.nOfRows, newSnake));
+            setFood(getFreeRandBlock(0, nRows, newSnake));
         };
 
         const isGameOver = (): boolean => {
             return (
-                willSnakeHitWall(snake, moveDirection, config.nOfRows) ||
+                willSnakeHitWall(snake, moveDirection, nRows) ||
                 willSnakeEatItself(snake, moveDirection)
             );
         };
@@ -135,7 +137,7 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
         return () => {
             clearInterval(timerId);
         };
-    }, [delay, food, gameOver, maxSnakeLength, moveDirection, score, snake]);
+    }, [delay, food, gameOver, nRows, maxSnakeLength, moveDirection, score, snake]);
 
     return (
         <div className="App">
@@ -144,7 +146,8 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
             {gameOver && (
                 <Button onClick={startClickHandler} displText={"start game"} />
             )}
-            <Canvas snake={snake} food={food} isGameOver={gameOver} score={score} />
+            <Canvas snake={snake} food={food} isGameOver={gameOver} score={score}
+                nRows={nRows} />
             {gameOver && (
                 <RadioSelect
                     choices={delays}

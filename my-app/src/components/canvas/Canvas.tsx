@@ -13,6 +13,7 @@ interface Props {
     isGameOver: boolean;
     score: number;
     snake: Block[];
+    nRows: number;
 }
 
 const Canvas: React.FC<Props> = (props): ReactElement<HTMLElement> => {
@@ -20,8 +21,8 @@ const Canvas: React.FC<Props> = (props): ReactElement<HTMLElement> => {
     const food: Block = props.food;
     const foodColor: string = config.foodColor;
     const isGameOver: boolean = props.isGameOver;
-    const nOfCols: number = config.nOfCols;
-    const nOfRows: number = config.nOfRows;
+    // nRows is always equal nCols
+    const nRows: number = props.nRows;
     const score: number = props.score;
     // x, y coordinates work similarly to nrow, ncol in Python's pd.DataFrame indexing
     const snake: Block[] = props.snake;
@@ -32,8 +33,8 @@ const Canvas: React.FC<Props> = (props): ReactElement<HTMLElement> => {
         if (canvas === null) {
             return undefined;
         }
-        const blockWidth: number = canvas.width / nOfCols;
-        const blockHeight: number = canvas.height / nOfRows;
+        const blockWidth: number = canvas.width / nRows;
+        const blockHeight: number = canvas.height / nRows;
         setCanvasDefaults(canvas);
         const ctx: CanvasRenderingContext2D | null = canvas.getContext("2d");
         if (ctx === null) {
@@ -47,7 +48,7 @@ const Canvas: React.FC<Props> = (props): ReactElement<HTMLElement> => {
         if (isGameOver) {
             displayGameOver(ctx, canvas, score);
         }
-    }, [snake, food, nOfRows, nOfCols, foodColor, snakeColor, isGameOver, score]);
+    }, [snake, food, nRows, foodColor, snakeColor, isGameOver, score]);
 
     return (
         <div>
