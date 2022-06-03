@@ -153,6 +153,7 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
             {gameOver && (
                 <RadioSelect
                     choices={delays}
+                    selectedChoice={delay}
                     actionOnSelect={radioSelectHandler}
                 />
             )}

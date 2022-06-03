@@ -1,4 +1,4 @@
-import { ReactElement, useState } from "react";
+import { ReactElement } from "react";
 
 import IRadioChoice from "../interfaces/IRadioChoice";
 
@@ -6,6 +6,7 @@ import "./RadioSelect.css";
 
 interface Props {
     choices: IRadioChoice[];
+    selectedChoice: number;
     actionOnSelect: (chosenValue: number) => void;
 }
 
@@ -13,11 +14,8 @@ const RadioSelect: React.FC<Props> = (
     props
 ): ReactElement<HTMLElement> => {
     const choices: IRadioChoice[] = props.choices;
+    const selectedChoice: number = props.selectedChoice;
     const actionOnSelect: (chosenValue: number) => void = props.actionOnSelect;
-
-    const [markedRadioVal, setMarkedRadioVal]: [string, Function] = useState(
-        choices[0].name
-    );
 
     const getRadio = (choice: IRadioChoice): ReactElement<HTMLElement> => {
         return (
@@ -27,7 +25,7 @@ const RadioSelect: React.FC<Props> = (
                     value={choice.name}
                     name="speed"
                     onChange={() => onSelect(choice)}
-                    checked={markedRadioVal === choice.name}
+                    checked={selectedChoice === choice.value}
                 />
                 <label htmlFor={choice.name} onClick={() => onSelect(choice)}>
                     {choice.name}
@@ -37,7 +35,6 @@ const RadioSelect: React.FC<Props> = (
     };
 
     const onSelect = (choice: IRadioChoice): void => {
-        setMarkedRadioVal(choice.name);
         actionOnSelect(choice.value);
     };
 
