@@ -33,6 +33,7 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
         { id: 0, name: "5x5", value: 5 },
         { id: 1, name: "6x6", value: 6 },
         { id: 2, name: "7x7", value: 7 },
+        { id: 3, name: "8x8", value: 8 },
     ]
     const [maxSnakeLength, setMaxSnakeLength]: [number, Function] = useState(
         nRows * nRows
