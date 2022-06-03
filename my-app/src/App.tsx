@@ -28,6 +28,12 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
     const [gameOver, setGameOver]: [boolean, Function] = useState(true);
     // nRows is always equal nCols
     const [nRows, setNrows]: [number, Function] = useState(config.nOfRows);
+    // value in gridSizes is nOfRows
+    const gridSizes: IRadioChoice[] = [
+        { id: 0, name: "5x5", value: 5 },
+        { id: 1, name: "6x6", value: 6 },
+        { id: 2, name: "7x7", value: 7 },
+    ]
     const [maxSnakeLength, setMaxSnakeLength]: [number, Function] = useState(
         nRows * nRows
     )
@@ -42,8 +48,12 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
         setGameOver(false);
     };
 
-    const radioSelectHandler = (delayMicroSecs: number): void => {
+    const radioSelectSpeedHandler = (delayMicroSecs: number): void => {
         setDelay(delayMicroSecs);
+    };
+    const radioSelectGridHandler = (nOfRows: number): void => {
+        setNrows(nOfRows);
+        setMaxSnakeLength(nOfRows * nOfRows);
     };
 
     useEffect(() => {
@@ -155,7 +165,15 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
                     mainLabel={"Choose speed level"}
                     choices={delays}
                     selectedChoice={delay}
-                    actionOnSelect={radioSelectHandler}
+                    actionOnSelect={radioSelectSpeedHandler}
+                />
+            )}
+            {gameOver && (
+                <RadioSelect
+                    mainLabel={"Choose grid size"}
+                    choices={gridSizes}
+                    selectedChoice={nRows}
+                    actionOnSelect={radioSelectGridHandler}
                 />
             )}
         </div>
