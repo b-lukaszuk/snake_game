@@ -11,7 +11,7 @@ import getFreeRandBlock from "./utils/getRandBlock";
 import Instructions from "./components/Instructions";
 import IRadioChoice from "./interfaces/IRadioChoice";
 import { shiftBlock, shiftSnake } from "./utils/shiftSnake";
-import SpeedLevelSelector from "./components/SpeedLevelSelector";
+import RadioSelect from "./components/RadioSelect";
 import willSnakeHitWall from "./utils/willSnakeHitWall";
 import willSnakeEatItself from "./utils/willSnakeEatItself";
 
@@ -20,9 +20,9 @@ import "./App.css";
 const App: React.FC = (): ReactElement<HTMLElement> => {
     const [delay, setDelay]: [number, Function] = useState(config.delay);
     const delays: IRadioChoice[] = [
-        { id: 0, name: "Kindergarten", delay: 1000 },
-        { id: 1, name: "School", delay: 800 },
-        { id: 2, name: "College", delay: 600 },
+        { id: 0, name: "Kindergarten", value: 1000 },
+        { id: 1, name: "School", value: 800 },
+        { id: 2, name: "College", value: 600 },
     ];
     const [food, setFood]: [Block, Function] = useState(config.food);
     const [gameOver, setGameOver]: [boolean, Function] = useState(true);
@@ -38,8 +38,8 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
         setGameOver(false);
     };
 
-    const radioSelectHandler = (chosenDelay: number): void => {
-        setDelay(chosenDelay);
+    const radioSelectHandler = (delayMicroSecs: number): void => {
+        setDelay(delayMicroSecs);
     };
 
     useEffect(() => {
@@ -146,7 +146,7 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
             )}
             <Canvas snake={snake} food={food} isGameOver={gameOver} score={score} />
             {gameOver && (
-                <SpeedLevelSelector
+                <RadioSelect
                     choices={delays}
                     actionOnSelect={radioSelectHandler}
                 />

@@ -2,18 +2,18 @@ import { ReactElement, useState } from "react";
 
 import IRadioChoice from "../interfaces/IRadioChoice";
 
-import "./SpeedLevelSelector.css";
+import "./RadioSelect.css";
 
 interface Props {
     choices: IRadioChoice[];
-    actionOnSelect: (chosenDelay: number) => void;
+    actionOnSelect: (chosenValue: number) => void;
 }
 
-const SpeedLevelSelector: React.FC<Props> = (
+const RadioSelect: React.FC<Props> = (
     props
 ): ReactElement<HTMLElement> => {
     const choices: IRadioChoice[] = props.choices;
-    const actionOnSelect: (chosenDelay: number) => void = props.actionOnSelect;
+    const actionOnSelect: (chosenValue: number) => void = props.actionOnSelect;
 
     const [markedRadioVal, setMarkedRadioVal]: [string, Function] = useState(
         choices[0].name
@@ -38,7 +38,7 @@ const SpeedLevelSelector: React.FC<Props> = (
 
     const onSelect = (choice: IRadioChoice): void => {
         setMarkedRadioVal(choice.name);
-        actionOnSelect(choice.delay);
+        actionOnSelect(choice.value);
     };
 
     return (
@@ -49,4 +49,4 @@ const SpeedLevelSelector: React.FC<Props> = (
     );
 };
 
-export default SpeedLevelSelector;
+export default RadioSelect;
