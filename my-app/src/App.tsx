@@ -20,9 +20,9 @@ import "./App.css";
 const App: React.FC = (): ReactElement<HTMLElement> => {
     const [delay, setDelay]: [number, Function] = useState(config.delay);
     const delays: IRadioChoice[] = [
-        { id: 0, name: "Kindergarten", value: 1000 },
-        { id: 1, name: "School", value: 800 },
-        { id: 2, name: "College", value: 600 },
+        { id: 0, name: "1 sec", value: 1000 },
+        { id: 1, name: "0.8 sec", value: 800 },
+        { id: 2, name: "0.6 sec", value: 600 },
     ];
     const [food, setFood]: [Block, Function] = useState(config.food);
     const [gameOver, setGameOver]: [boolean, Function] = useState(true);
