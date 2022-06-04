@@ -163,7 +163,8 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
                 nRows={nRows} />
             {gameOver && (
                 <RadioSelect
-                    mainLabel={"Choose speed level"}
+                    mainLabel={"Choose move delay"}
+                    groupName="speed"
                     choices={delays}
                     selectedChoice={delay}
                     actionOnSelect={radioSelectSpeedHandler}
@@ -172,6 +173,7 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
             {gameOver && (
                 <RadioSelect
                     mainLabel={"Choose grid size"}
+                    groupName={"grid"}
                     choices={gridSizes}
                     selectedChoice={nRows}
                     actionOnSelect={radioSelectGridHandler}

@@ -6,6 +6,7 @@ import "./RadioSelect.css";
 
 interface Props {
     mainLabel: string;
+    groupName: string;
     choices: IRadioChoice[];
     selectedChoice: number;
     actionOnSelect: (chosenValue: number) => void;
@@ -15,6 +16,7 @@ const RadioSelect: React.FC<Props> = (
     props
 ): ReactElement<HTMLElement> => {
     const mainLabel: string = props.mainLabel;
+    const groupName: string = props.groupName;
     const choices: IRadioChoice[] = props.choices;
     const selectedChoice: number = props.selectedChoice;
     const actionOnSelect: (chosenValue: number) => void = props.actionOnSelect;
@@ -25,7 +27,7 @@ const RadioSelect: React.FC<Props> = (
                 <input
                     type="radio"
                     value={choice.name}
-                    name="speed"
+                    name={groupName}
                     onChange={() => onSelect(choice)}
                     checked={selectedChoice === choice.value}
                 />
