@@ -23,6 +23,7 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
         { id: 0, name: "1 sec", value: 1000 },
         { id: 1, name: "0.8 sec", value: 800 },
         { id: 2, name: "0.6 sec", value: 600 },
+        { id: 3, name: "0.4 sec", value: 400 },
     ];
     const [food, setFood]: [Block, Function] = useState(config.food);
     const [gameOver, setGameOver]: [boolean, Function] = useState(true);
