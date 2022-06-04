@@ -58,6 +58,8 @@ const App: React.FC = (): ReactElement<HTMLElement> => {
         setMaxSnakeLength(nOfRows * nOfRows);
     };
 
+    useEffect(() => { document.title = "Snake Game" }, []);
+
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
             let newDirection: Direction = moveDirection;
