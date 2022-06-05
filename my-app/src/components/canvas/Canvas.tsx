@@ -4,7 +4,7 @@ import Block from "../..//interfaces/Block";
 import config from "../../config/config";
 import displayGameOver from "./draw/displayGameOver";
 import drawBlock from "./draw/drawBlock";
-import setCanvasDefaults from "./draw/setCanvasDefaults";
+import setCanvasDefaults from "./setCanvasDefaults";
 
 import "./Canvas.css";
 
